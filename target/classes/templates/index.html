@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Domácí rozpočet</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-links">
+        <a href="#nasRoz">Nastavit rozpočet</a>
+        <a href="#pridRoz">Přidat rozpočet</a>
+        <a href="#celTab">Celkový rozpočet, útrata, zbývající rozpočet</a>
+        <a href="#tab">Tabulka všech výdajů</a>
+    </div>
+</div>
+
+<h1>Domácí rozpočet</h1>
+
+<div class="form-container">
+    <form class="budget-form" th:action="@{/setTotalBudget}" method="post">
+        <div class="form-group">
+            <label for="totalBudget">Celkový rozpočet:</label>
+            <input type="number" id="totalBudget" name="totalBudget" required />
+        </div>
+        <button id="nasRoz" type="submit">Nastavit rozpočet</button>
+    </form>
+</div>
+
+
+<div class="form-container">
+    <form class="article-form" th:action="@{/createBudget}" method="post">
+        <div class="form-group">
+            <label for="name">Jméno:</label>
+            <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+            <label for="amount">Částka:</label>
+            <input type="number" id="amount" name="amount" required />
+        </div>
+        <div class="form-group">
+            <label for="category">Kategorie:</label>
+            <input type="text" id="category" name="category" required />
+        </div>
+        <div class="form-group">
+            <label for="date">Datum:</label>
+            <input type="date" id="date" name="date" required />
+        </div>
+        <button id="pridRoz" type="submit">Přidat rozpočet</button>
+    </form>
+</div>
+
+<div id="celTab" class="budget-summary">
+    <p>Celkový rozpočet: <span th:text="${totalBudget}"></span> Kč</p>
+    <p>Celková utracená částka: <span th:text="${totalSpent}"></span> Kč</p>
+    <p>Zbývající rozpočet: <span th:text="${remainingBudget}"></span> Kč</p>
+</div>
+
+
+<table id="tab" class="domaciRozpocet-table">
+    <thead>
+    <tr>
+        <th>Jméno</th>
+        <th>Částka</th>
+        <th>Kategorie</th>
+        <th>Datum</th>
+        <th>Stav</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="budget : ${budgets}">
+        <td th:text="${budget.name}">Jméno</td>
+        <td th:text="${budget.amount}">Částka</td>
+        <td th:text="${budget.category}">Kategorie</td>
+        <td th:text="${budget.date}">Datum</td>
+        <td>
+            <form th:action="@{/deleteBudget}" method="POST">
+                <input type="hidden" name="budgetId" th:value="${budget.id}" />
+                <button type="submit">Vymazat</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
