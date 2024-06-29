@@ -1,6 +1,6 @@
 package org.example.domacirozpocet2.repository;
 
-import org.example.domacirozpocet2.model.BudgetItem;
+import org.example.domacirozpocet2.entity.BudgetItem;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

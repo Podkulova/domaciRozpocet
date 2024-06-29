@@ -1,6 +1,6 @@
 package org.example.domacirozpocet2.service.implementaion;
 
-import org.example.domacirozpocet2.model.BudgetItem;
+import org.example.domacirozpocet2.entity.BudgetItem;
 import org.example.domacirozpocet2.repository.BudgetRepository;
 import org.example.domacirozpocet2.service.BudgetService;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package org.example.domacirozpocet2.model;
+package org.example.domacirozpocet2.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,8 +1,7 @@
 package org.example.domacirozpocet2.controller;
 
-import org.example.domacirozpocet2.model.BudgetItem;
-import org.example.domacirozpocet2.model.BudgetSummary;
-import org.example.domacirozpocet2.repository.BudgetSummaryRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.example.domacirozpocet2.entity.BudgetItem;
 import org.example.domacirozpocet2.service.implementaion.BudgetServiceImpl;
 import org.example.domacirozpocet2.service.implementaion.BudgetSummaryService;
 import org.example.domacirozpocet2.service.implementaion.TotalBudgetService;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Controller
+@Slf4j
 public class BudgetController {
 
     private final BudgetServiceImpl budgetService;
@@ -31,15 +30,18 @@ public class BudgetController {
     }
 
     @PostMapping("/createBudget")
-    public String createBudget(@RequestParam String name, @RequestParam double amount, @RequestParam String category, @RequestParam LocalDate date, Model model) {
-        BudgetItem budgetItem = new BudgetItem(name, amount, category, date);
-        budgetService.addBudgetItem(budgetItem);
-        budgetService.addBudgetItem2(budgetItem);
+    public String createBudget(@RequestParam String name,
+                               @RequestParam double amount,
+                               @RequestParam String category,
+                               @RequestParam LocalDate date) {
+
+        budgetService.createBudget(name, amount, category, date);
+        log.info(String.format("Uživatel vvtvořil budget s názvem '%s'", category));
         return "redirect:/";
     }
 
     @GetMapping
-    public String allBadget(Model model) {
+    public String allBudget(Model model) {
         model.addAttribute("budgets", budgetService.getAllBudgetItems());
         model.addAttribute("totalBudget", totalBudget);
         model.addAttribute("totalSpent", budgetService.getTotalSpent());
@@ -54,7 +56,7 @@ public class BudgetController {
     }
 
     @PostMapping("/deleteBudget")
-    public String deleteToDo(@RequestParam Integer budgetId) {
+    public String deleteBudget(@RequestParam Integer budgetId) {
         budgetService.deleteBudget(budgetId);
         return "redirect:/";
     }

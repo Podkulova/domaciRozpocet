@@ -1,6 +1,6 @@
 package org.example.domacirozpocet2.service;
 
-import org.example.domacirozpocet2.model.BudgetItem;
+import org.example.domacirozpocet2.entity.BudgetItem;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

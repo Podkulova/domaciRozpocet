@@ -1,8 +1,7 @@
 package org.example.domacirozpocet2.service.implementaion;
 
-import org.example.domacirozpocet2.model.BudgetSummary;
+import org.example.domacirozpocet2.entity.BudgetSummary;
 import org.example.domacirozpocet2.repository.BudgetSummaryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

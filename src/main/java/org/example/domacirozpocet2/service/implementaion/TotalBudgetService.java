@@ -1,12 +1,7 @@
 package org.example.domacirozpocet2.service.implementaion;
 
 import lombok.Data;
-import lombok.Setter;
-import org.example.domacirozpocet2.model.TotalBudget;
-import org.example.domacirozpocet2.repository.TotalBudgetRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @Data

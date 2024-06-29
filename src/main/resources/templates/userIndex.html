@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User API</title>
+    <link rel="stylesheet" href="userStyle.css">
+</head>
+<body>
+<div class="container">
+    <h1>User API</h1>
+
+    <!-- Create User Form -->
+    <div class="form-container">
+        <h2>Create User</h2>
+        <form th:action="@{/sign}" method="post" id="createUserForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Create User</button>
+        </form>
+    </div>
+
+    <!-- Fetch All Users -->
+    <div class="form-container">
+        <h2>Fetch All Users</h2>
+        <button th:onclick="|fetchAllUsers()|">Fetch All Users</button>
+        <div id="allUsersResult">
+            <ul>
+                <li th:each="user : ${users}" th:text="${user}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Fetch User by ID -->
+    <div class="form-container">
+        <h2>Fetch User by ID</h2>
+        <form th:action="@{/fetchUserById}" method="get" id="fetchUserByIdForm">
+            <label for="userId">User ID:</label>
+            <input type="number" id="userId" name="id" required>
+            <button type="submit">Fetch User</button>
+        </form>
+        <div id="userByIdResult">
+            <p th:text="${user}"></p>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/scripts.js}"></script>
+</body>
+</html>
