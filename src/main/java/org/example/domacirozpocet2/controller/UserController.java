@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("users", service.getAllUsers());
-        return "index";
+        return "userIndex";
     }
     @PostMapping("/sign")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest) {
