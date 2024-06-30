@@ -1,6 +1,7 @@
 package org.example.domacirozpocet2.service.implementaion;
 
 import org.example.domacirozpocet2.entity.BudgetItem;
+import org.example.domacirozpocet2.exception.InvalidStatusExeption;
 import org.example.domacirozpocet2.repository.BudgetRepository;
 import org.example.domacirozpocet2.service.BudgetService;
 import org.springframework.stereotype.Service;
@@ -25,13 +26,22 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public void createBudget(String name, double amount, String category, LocalDate date) {
-        BudgetItem item = new BudgetItem(name, amount, category, date);
-        budgetRepository.save(item);
+        BudgetItem budgetItem = BudgetItem.builder()
+                .name(name)
+                .amount(amount)
+                .category(category)
+                .date(date)
+                .build();
+
+        if (name == null || category == null || date == null) {
+            throw new InvalidStatusExeption("Jméno, kategorie nebo datum nemůže být null");
+        }
+        budgetRepository.save(budgetItem);
     }
 
     @Override
     public List<BudgetItem> getAllBudgetItems() {
-        return budgetItems;
+        return budgetRepository.findAll();
     }
 
     public double getTotalSpent() {

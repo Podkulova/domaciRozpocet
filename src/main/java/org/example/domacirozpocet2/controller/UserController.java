@@ -18,7 +18,6 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users")
 public class UserController {
 
     private final UserService service;
@@ -33,13 +32,27 @@ public class UserController {
         return new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
     }
 
+    @GetMapping("/login")
+    public String authenticate() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        // create model object to store form data
+        UserRequest user = new UserRequest();
+        model.addAttribute("user", user);
+        return "register";
+    }
+
+
     @GetMapping("fetchAll")
     public  ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(service.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUsers(@PathVariable @NotNull @NotEmpty int id) throws UsersNotFoundExeption {
+    public ResponseEntity<User> getUsers(@PathVariable @NotNull @NotEmpty Long id) throws UsersNotFoundExeption {
         return ResponseEntity.ok(service.getUser(id));
     }
 }

@@ -19,4 +19,5 @@ public class UserRequest {
     private String email;
     @Pattern(regexp = "^\\d{10}$", message = "špatný zadaný tel.")
     private String mobile;
+    private String password;
 }
