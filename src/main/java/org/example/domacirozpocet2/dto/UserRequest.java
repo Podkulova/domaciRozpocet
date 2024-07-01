@@ -11,13 +11,14 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {
-    @NotNull(message = "username nesmí být null")
-    @NotBlank(message = "username nesmí být prázdné")
-    @NotEmpty(message = "username nesmí být prázdný")
+    @NotNull(message = "Username cannot be null")
+    @NotBlank(message = "Username cannot be blank")
     private String name;
-    @Email(message = "špatná emailová adresa")
+    @Email(message = "Invalid email address")
     private String email;
-    @Pattern(regexp = "^\\d{10}$", message = "špatný zadaný tel.")
+    @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number")
     private String mobile;
+    @NotNull(message = "Password cannot be null")
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 }

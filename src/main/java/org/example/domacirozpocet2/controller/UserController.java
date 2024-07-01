@@ -22,18 +22,18 @@ public class UserController {
 
     private final UserService service;
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("users", service.getAllUsers());
-        return "userIndex";
-    }
-    @PostMapping("/sign")
+   /* @PostMapping("/sign")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest) {
         return new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
+    } */
+
+    @GetMapping("/")
+    public String index(Model model) {
+        return "login"; //
     }
 
     @GetMapping("/login")
-    public String authenticate() {
+    public String autentchited() {
         return "login";
     }
 

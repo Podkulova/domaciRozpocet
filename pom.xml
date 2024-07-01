@@ -78,6 +78,12 @@
             <artifactId>flyway-mysql</artifactId>
             <version>10.10.0</version> <!-- nebo nejnovější verze -->
         </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.14.17</version>
+        </dependency>
     </dependencies>
 
     <build>
