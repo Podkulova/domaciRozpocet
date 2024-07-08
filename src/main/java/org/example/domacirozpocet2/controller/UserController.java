@@ -8,26 +8,27 @@ import org.example.domacirozpocet2.entity.User;
 import org.example.domacirozpocet2.exception.UsersNotFoundExeption;
 import org.example.domacirozpocet2.service.implementaion.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService service;
+    private  UserService service;
 
     @GetMapping("/")
     public String index(Model model) {
-        return "login"; // returns login.html
+        return "login";
     }
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login"; // returns login.html
+        return "login";
     }
 
     @GetMapping("/register")
@@ -35,6 +36,16 @@ public class UserController {
         UserRequest user = new UserRequest();
         model.addAttribute("user", user);
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute("user") @Valid UserRequest userRequest, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("user", userRequest);
+            return "register";
+        }
+        service.saveUser(userRequest);
+        return "redirect:/login";
     }
 
     /*@GetMapping("/fetchAll")

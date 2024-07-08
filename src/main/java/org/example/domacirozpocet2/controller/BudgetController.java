@@ -70,7 +70,7 @@ public class BudgetController {
         return "redirect:/";
     }
 
-    @GetMapping("/summary")
+/*    @GetMapping("/summary")
     public String showSummary(Model model) {
         model.addAttribute("totalBudget", budgetSummaryService.getBudgetSummary().getTotalBudget());
         model.addAttribute("totalBudgetPerson1", totalBudgetService.getTotalBudgetPerson1());
@@ -90,7 +90,7 @@ public class BudgetController {
         model.addAttribute("totalBudgetPerson1", totalBudgetService.getTotalBudgetPerson1());
         model.addAttribute("totalBudgetPerson2", totalBudgetService.getTotalBudgetPerson2());
         return "totalBudget";
-    }
+    }*/
 
 }
 
