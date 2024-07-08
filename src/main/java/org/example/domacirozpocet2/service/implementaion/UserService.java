@@ -10,8 +10,11 @@ import org.example.domacirozpocet2.repository.RoleRepository;
 import org.example.domacirozpocet2.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -24,13 +27,13 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public User saveUser(UserRequest userRequest) {
+    @Transactional
+    public User saveUser(@Valid UserRequest userRequest) {
         log.info("Saving user with email: {}", userRequest.getEmail());
 
         User user = User.builder()
                 .name(userRequest.getName())
                 .email(userRequest.getEmail())
-                .mobile(userRequest.getMobile())
                 .password(passwordEncoder.encode(userRequest.getPassword()))
                 .build();
 
@@ -41,13 +44,14 @@ public class UserService {
             role = checkRoleExist();
         }
 
-        user.setRoles(List.of(role));
+        user.setRoles(Set.of(role));
         role.getUsers().add(user);
 
        User saveUser = userRepository.save(user);
         log.info("Saved user: {}", saveUser);
         return saveUser;
     }
+
     private Role checkRoleExist() {
         Role role = Role.builder().name("ROLE_USER").build();
 
@@ -84,7 +88,6 @@ public class UserService {
         UserRequest userRequest = new UserRequest();
         userRequest.setName(user.getName());
         userRequest.setEmail(user.getEmail());
-        userRequest.setMobile(user.getMobile());
         return userRequest;
     }
 }

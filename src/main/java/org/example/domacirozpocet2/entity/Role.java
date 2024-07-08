@@ -3,8 +3,7 @@ package org.example.domacirozpocet2.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -22,5 +21,5 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<User> users = new ArrayList<>();
+    private Set<User> users;
 }

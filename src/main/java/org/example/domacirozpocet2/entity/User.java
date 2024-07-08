@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,16 +21,18 @@ public class User {
     private Long userId;
 
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String email;
-    private String mobile;
+
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"), // Toto by mělo být jméno sloupce v tabulce users_roles, který odkazuje na ID uživatele
             inverseJoinColumns = @JoinColumn(name = "role_id") // Toto by mělo být jméno sloupce v tabulce users_roles, který odkazuje na ID role
     )
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles;
 }

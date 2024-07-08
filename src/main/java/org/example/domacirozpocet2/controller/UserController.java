@@ -7,11 +7,9 @@ import org.example.domacirozpocet2.dto.UserRequest;
 import org.example.domacirozpocet2.entity.User;
 import org.example.domacirozpocet2.exception.UsersNotFoundExeption;
 import org.example.domacirozpocet2.service.implementaion.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -22,37 +20,32 @@ public class UserController {
 
     private final UserService service;
 
-   /* @PostMapping("/sign")
-    public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest) {
-        return new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
-    } */
-
     @GetMapping("/")
     public String index(Model model) {
-        return "login"; //
+        return "login"; // returns login.html
     }
 
     @GetMapping("/login")
-    public String autentchited() {
-        return "login";
+    public String showLoginPage() {
+        return "login"; // returns login.html
     }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        // create model object to store form data
         UserRequest user = new UserRequest();
         model.addAttribute("user", user);
         return "register";
     }
 
-
-    @GetMapping("fetchAll")
-    public  ResponseEntity<List<User>> getAllUsers() {
+    /*@GetMapping("/fetchAll")
+    public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(service.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUsers(@PathVariable @NotNull @NotEmpty Long id) throws UsersNotFoundExeption {
+    public ResponseEntity<User> getUser(@PathVariable @NotNull @NotEmpty Long id) throws UsersNotFoundExeption {
         return ResponseEntity.ok(service.getUser(id));
     }
+    */
 }
+
